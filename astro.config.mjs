@@ -5,6 +5,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://francogaggero.github.io',
+  base: '/francogaggero-astro',
   server: {
     port: 8080
   },
