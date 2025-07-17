@@ -1,4 +1,6 @@
-# Astro Starter Kit: Basics
+# Franco Gaggero - Portfolio
+
+Modern portfolio built with Astro and TailwindCSS.
 
 ```sh
 npm create astro@latest -- --template basics
