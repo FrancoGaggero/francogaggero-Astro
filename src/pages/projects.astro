@@ -1,0 +1,391 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<!--ONLY PROYECTS -->
+<Layout title="Projects - Franco Gaggero" description="Explore all projects by Franco Gaggero - Full Stack Developer showcasing university and personal projects">
+	<!-- Hero Section -->
+	<section class="pt-32 pb-16 bg-gradient-to-br from-slate-50 via-white to-slate-100 relative overflow-hidden">
+		<!-- Elementos decorativos de fondo -->
+		<div class="absolute inset-0 overflow-hidden">
+			<div class="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-full opacity-60 blur-3xl"></div>
+			<div class="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-violet-100 to-purple-100 rounded-full opacity-60 blur-3xl"></div>
+		</div>
+		
+		<div class="max-w-6xl mx-auto px-6 relative z-10">
+			<!-- Go home button -->
+			<div class="text-center mb-8">
+				<a href="/" class="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-full text-sm font-medium hover:bg-slate-800 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5">
+					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+					</svg>
+					Back to Home
+				</a>
+			</div>
+			
+		<div class="max-w-6xl mx-auto px-6 relative z-10">
+			<!-- Breadcrumb -->
+			<nav class="flex items-center gap-2 text-sm text-slate-600 mb-8">
+				<a href="/" class="hover:text-slate-900 transition-colors">Home</a>
+				<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+				</svg>
+				<span class="text-slate-900 font-medium">Projects</span>
+			</nav>
+			
+			<!-- Header -->
+             
+			<div class="text-center mb-16">
+				<div class="inline-flex items-center gap-2 bg-white text-slate-600 px-4 py-2 rounded-full text-sm font-medium mb-6 shadow-sm">
+					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+					</svg>
+					All Projects Portfolio
+				</div>
+				<h1 class="text-4xl lg:text-6xl font-bold text-slate-900 mb-6 leading-tight">
+					My Complete 
+					<span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Project Journey</span>
+				</h1>
+				<p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+					From university coursework to personal explorations, here's a comprehensive view of my development journey and technical growth.
+				</p>
+			</div>
+			
+			<!-- Stats -->
+			<div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+				<div class="text-center bg-white/50 backdrop-blur-sm rounded-xl p-6 border border-slate-200/50">
+					<div class="text-2xl font-bold text-slate-900 mb-1">8+</div>
+					<div class="text-sm text-slate-600">Projects Completed</div>
+				</div>
+				<div class="text-center bg-white/50 backdrop-blur-sm rounded-xl p-6 border border-slate-200/50">
+					<div class="text-2xl font-bold text-slate-900 mb-1">5+</div>
+					<div class="text-sm text-slate-600">Technologies Used</div>
+				</div>
+				<div class="text-center bg-white/50 backdrop-blur-sm rounded-xl p-6 border border-slate-200/50">
+					<div class="text-2xl font-bold text-slate-900 mb-1">2+</div>
+					<div class="text-sm text-slate-600">Years Learning</div>
+				</div>
+				<div class="text-center bg-white/50 backdrop-blur-sm rounded-xl p-6 border border-slate-200/50">
+					<div class="text-2xl font-bold text-slate-900 mb-1">100%</div>
+					<div class="text-sm text-slate-600">Open Source</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Filtros de proyectos -->
+	<section class="py-8 bg-white border-b border-slate-200">
+		<div class="max-w-6xl mx-auto px-6">
+			<div class="flex flex-wrap items-center justify-center gap-4">
+				<button class="px-6 py-2 bg-slate-900 text-white rounded-full text-sm font-medium transition-colors">All Projects</button>
+				<button class="px-6 py-2 bg-slate-100 text-slate-600 hover:bg-slate-200 rounded-full text-sm font-medium transition-colors">University</button>
+				<button class="px-6 py-2 bg-slate-100 text-slate-600 hover:bg-slate-200 rounded-full text-sm font-medium transition-colors">Personal</button>
+				<button class="px-6 py-2 bg-slate-100 text-slate-600 hover:bg-slate-200 rounded-full text-sm font-medium transition-colors">Java</button>
+				<button class="px-6 py-2 bg-slate-100 text-slate-600 hover:bg-slate-200 rounded-full text-sm font-medium transition-colors">Laravel</button>
+				<button class="px-6 py-2 bg-slate-100 text-slate-600 hover:bg-slate-200 rounded-full text-sm font-medium transition-colors">Web Development</button>
+			</div>
+		</div>
+	</section>
+
+	<!-- Grid de proyectos -->
+	<section class="py-20 bg-slate-50">
+		<div class="max-w-6xl mx-auto px-6">
+			<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+				
+				<!-- Proyecto 1: Sistema de Gestión Biblioteca -->
+				<div class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+					<div class="relative overflow-hidden">
+						<div class="h-48 bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-600 flex items-center justify-center">
+							<div class="text-white text-5xl">📚</div>
+						</div>
+						<div class="absolute top-4 left-4">
+							<span class="px-3 py-1 bg-white/90 text-slate-700 rounded-full text-xs font-medium">University Project</span>
+						</div>
+					</div>
+					
+					<div class="p-6">
+						<div class="flex items-center gap-2 mb-3">
+							<span class="px-2 py-1 bg-red-100 text-red-700 rounded text-xs font-medium">Java</span>
+							<span class="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs font-medium">MySQL</span>
+							<span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs font-medium">Swing</span>
+						</div>
+						
+						<h3 class="text-xl font-bold text-slate-900 mb-2">Library Management System</h3>
+						<p class="text-slate-600 text-sm leading-relaxed mb-4">
+							Complete CRUD system for library management with book inventory, user registration, loan tracking, and automated reports.
+						</p>
+						
+						<div class="flex items-center justify-between">
+							<div class="flex gap-3">
+								<a href="https://github.com/francogaggero/biblioteca-java" target="_blank" 
+								   class="flex items-center gap-1 text-slate-600 hover:text-slate-900 transition-colors">
+									<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+										<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+									</svg>
+									<span class="text-xs font-medium">Code</span>
+								</a>
+								<a href="/projects/biblioteca-gallery" 
+								   class="flex items-center gap-1 text-slate-600 hover:text-blue-600 transition-colors">
+									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+									</svg>
+									<span class="text-xs font-medium">Screenshots</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Proyecto 2: E-commerce Laravel -->
+				<div class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+					<div class="relative overflow-hidden">
+						<div class="h-48 bg-gradient-to-br from-red-500 via-orange-500 to-yellow-600 flex items-center justify-center">
+							<div class="text-white text-5xl">🛒</div>
+						</div>
+						<div class="absolute top-4 left-4">
+							<span class="px-3 py-1 bg-white/90 text-slate-700 rounded-full text-xs font-medium">University Project</span>
+						</div>
+					</div>
+					
+					<div class="p-6">
+						<div class="flex items-center gap-2 mb-3">
+							<span class="px-2 py-1 bg-red-100 text-red-700 rounded text-xs font-medium">Laravel</span>
+							<span class="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs font-medium">PHP</span>
+							<span class="px-2 py-1 bg-orange-100 text-orange-700 rounded text-xs font-medium">MySQL</span>
+						</div>
+						
+						<h3 class="text-xl font-bold text-slate-900 mb-2">E-commerce Platform</h3>
+						<p class="text-slate-600 text-sm leading-relaxed mb-4">
+							Full-featured online store with product catalog, shopping cart, payment integration, user authentication, and admin dashboard.
+						</p>
+						
+						<div class="flex items-center justify-between">
+							<div class="flex gap-3">
+								<a href="https://github.com/francogaggero/ecommerce-laravel" target="_blank" 
+								   class="flex items-center gap-1 text-slate-600 hover:text-slate-900 transition-colors">
+									<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+										<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+									</svg>
+									<span class="text-xs font-medium">Code</span>
+								</a>
+								<a href="/projects/ecommerce-gallery" 
+								   class="flex items-center gap-1 text-slate-600 hover:text-orange-600 transition-colors">
+									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+									</svg>
+									<span class="text-xs font-medium">Screenshots</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Proyecto 3: Calculadora Científica -->
+				<div class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+					<div class="relative overflow-hidden">
+						<div class="h-48 bg-gradient-to-br from-green-500 via-emerald-500 to-teal-600 flex items-center justify-center">
+							<div class="text-white text-5xl">🧮</div>
+						</div>
+						<div class="absolute top-4 left-4">
+							<span class="px-3 py-1 bg-white/90 text-slate-700 rounded-full text-xs font-medium">University Project</span>
+						</div>
+					</div>
+					
+					<div class="p-6">
+						<div class="flex items-center gap-2 mb-3">
+							<span class="px-2 py-1 bg-red-100 text-red-700 rounded text-xs font-medium">Java</span>
+							<span class="px-2 py-1 bg-purple-100 text-purple-700 rounded text-xs font-medium">Swing</span>
+						</div>
+						
+						<h3 class="text-xl font-bold text-slate-900 mb-2">Scientific Calculator</h3>
+						<p class="text-slate-600 text-sm leading-relaxed mb-4">
+							Advanced calculator with scientific functions, memory operations, history tracking, and intuitive GUI design.
+						</p>
+						
+						<div class="flex items-center justify-between">
+							<div class="flex gap-3">
+								<a href="https://github.com/francogaggero/calculadora-java" target="_blank" 
+								   class="flex items-center gap-1 text-slate-600 hover:text-slate-900 transition-colors">
+									<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+										<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+									</svg>
+									<span class="text-xs font-medium">Code</span>
+								</a>
+								<a href="/projects/calculadora-gallery" 
+								   class="flex items-center gap-1 text-slate-600 hover:text-green-600 transition-colors">
+									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+									</svg>
+									<span class="text-xs font-medium">Screenshots</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Proyecto 4: Sistema de Inventario -->
+				<div class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+					<div class="relative overflow-hidden">
+						<div class="h-48 bg-gradient-to-br from-purple-500 via-violet-500 to-indigo-600 flex items-center justify-center">
+							<div class="text-white text-5xl">📦</div>
+						</div>
+						<div class="absolute top-4 left-4">
+							<span class="px-3 py-1 bg-white/90 text-slate-700 rounded-full text-xs font-medium">University Project</span>
+						</div>
+					</div>
+					
+					<div class="p-6">
+						<div class="flex items-center gap-2 mb-3">
+							<span class="px-2 py-1 bg-red-100 text-red-700 rounded text-xs font-medium">Java</span>
+							<span class="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs font-medium">MySQL</span>
+						</div>
+						
+						<h3 class="text-xl font-bold text-slate-900 mb-2">Inventory Management</h3>
+						<p class="text-slate-600 text-sm leading-relaxed mb-4">
+							Stock control system with product tracking, supplier management, sales reports, and low-stock alerts.
+						</p>
+						
+						<div class="flex items-center justify-between">
+							<div class="flex gap-3">
+								<a href="https://github.com/francogaggero/inventario-java" target="_blank" 
+								   class="flex items-center gap-1 text-slate-600 hover:text-slate-900 transition-colors">
+									<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+										<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+									</svg>
+									<span class="text-xs font-medium">Code</span>
+								</a>
+								<a href="/projects/inventario-gallery" 
+								   class="flex items-center gap-1 text-slate-600 hover:text-purple-600 transition-colors">
+									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+									</svg>
+									<span class="text-xs font-medium">Screenshots</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Proyecto 5: Portfolio Personal -->
+				<div class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+					<div class="relative overflow-hidden">
+						<div class="h-48 bg-gradient-to-br from-orange-500 via-red-500 to-pink-600 flex items-center justify-center">
+							<div class="text-white text-5xl">🚀</div>
+						</div>
+						<div class="absolute top-4 left-4">
+							<span class="px-3 py-1 bg-white/90 text-slate-700 rounded-full text-xs font-medium">Personal Project</span>
+						</div>
+						<div class="absolute top-4 right-4">
+							<span class="px-2 py-1 bg-green-500 text-white rounded text-xs font-bold">LIVE</span>
+						</div>
+					</div>
+					
+					<div class="p-6">
+						<div class="flex items-center gap-2 mb-3">
+							<span class="px-2 py-1 bg-orange-100 text-orange-700 rounded text-xs font-medium">Astro</span>
+							<span class="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs font-medium">Tailwind</span>
+							<span class="px-2 py-1 bg-purple-100 text-purple-700 rounded text-xs font-medium">TypeScript</span>
+						</div>
+						
+						<h3 class="text-xl font-bold text-slate-900 mb-2">Personal Portfolio</h3>
+						<p class="text-slate-600 text-sm leading-relaxed mb-4">
+							Modern, responsive portfolio website showcasing projects and skills with clean design and smooth animations.
+						</p>
+						
+						<div class="flex items-center justify-between">
+							<div class="flex gap-3">
+								<a href="https://github.com/francogaggero/portfolio-astro" target="_blank" 
+								   class="flex items-center gap-1 text-slate-600 hover:text-slate-900 transition-colors">
+									<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+										<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+									</svg>
+									<span class="text-xs font-medium">Code</span>
+								</a>
+								<a href="/" 
+								   class="flex items-center gap-1 text-slate-600 hover:text-orange-600 transition-colors">
+									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+									</svg>
+									<span class="text-xs font-medium">Live Site</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Proyecto 6: API REST -->
+				<div class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+					<div class="relative overflow-hidden">
+						<div class="h-48 bg-gradient-to-br from-cyan-500 via-blue-500 to-indigo-600 flex items-center justify-center">
+							<div class="text-white text-5xl">🔌</div>
+						</div>
+						<div class="absolute top-4 left-4">
+							<span class="px-3 py-1 bg-white/90 text-slate-700 rounded-full text-xs font-medium">Learning Project</span>
+						</div>
+					</div>
+					
+					<div class="p-6">
+						<div class="flex items-center gap-2 mb-3">
+							<span class="px-2 py-1 bg-red-100 text-red-700 rounded text-xs font-medium">Java</span>
+							<span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs font-medium">Spring Boot</span>
+							<span class="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs font-medium">MySQL</span>
+						</div>
+						
+						<h3 class="text-xl font-bold text-slate-900 mb-2">REST API Service</h3>
+						<p class="text-slate-600 text-sm leading-relaxed mb-4">
+							RESTful API with CRUD operations, authentication, data validation, and comprehensive documentation.
+						</p>
+						
+						<div class="flex items-center justify-between">
+							<div class="flex gap-3">
+								<a href="https://github.com/francogaggero/api-rest-spring" target="_blank" 
+								   class="flex items-center gap-1 text-slate-600 hover:text-slate-900 transition-colors">
+									<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+										<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+									</svg>
+									<span class="text-xs font-medium">Code</span>
+								</a>
+								<a href="/projects/api-gallery" 
+								   class="flex items-center gap-1 text-slate-600 hover:text-cyan-600 transition-colors">
+									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+									</svg>
+									<span class="text-xs font-medium">Documentation</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA Section -->
+	<section class="py-20 bg-slate-900 text-white">
+		<div class="max-w-4xl mx-auto px-6 text-center">
+			<h2 class="text-3xl lg:text-4xl font-bold mb-6">
+				Interested in collaborating?
+			</h2>
+			<p class="text-xl text-slate-300 mb-8 leading-relaxed">
+				These projects represent my journey in software development. I'm always excited to take on new challenges and create innovative solutions.
+			</p>
+			<div class="flex flex-col sm:flex-row gap-4 justify-center">
+				<a href="/#contact" 
+				   class="group bg-white text-slate-900 px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:bg-slate-100 hover:shadow-xl hover:-translate-y-1 flex items-center justify-center gap-2">
+					Get in Touch
+					<svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+					</svg>
+				</a>
+				<a href="https://github.com/francogaggero" target="_blank"
+				   class="group border-2 border-slate-700 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:border-slate-500 hover:bg-slate-800 hover:-translate-y-1 flex items-center justify-center gap-2">
+					View GitHub
+					<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+						<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+					</svg>
+				</a>
+			</div>
+		</div>
+	</section>
+</Layout>
