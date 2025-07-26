@@ -7,6 +7,10 @@ export interface Props {
 }
 
 const { title = "Franco Gaggero - Full Stack Developer", description = "Portfolio personal de Franco Gaggero - Desarrollador Full Stack especializado en tecnologías web modernas" } = Astro.props;
+
+// Detectar la página actual para navegación dinámica
+const currentPath = Astro.url.pathname;
+const isProjectsPage = currentPath === '/projects' || currentPath === '/projects/';
 ---
 
 <!doctype html>
@@ -25,75 +29,38 @@ const { title = "Franco Gaggero - Full Stack Developer", description = "Portfoli
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 	</head>
 	<body class="font-inter bg-white text-slate-900 antialiased">
-		<!-- Navegación flotante moderna -->
-		<nav class="fixed top-8 left-1/2 transform -translate-x-1/2 z-50 px-4">
-			<div class="bg-white/90 backdrop-blur-md border border-slate-200/60 rounded-full px-10 py-3 shadow-xl shadow-slate-900/10 whitespace-nowrap">
-				<ul class="flex items-center gap-8">
-					<!-- Logo/Home -->
-					<li>
-						<a href="#top" class="flex items-center gap-2 text-slate-900 hover:text-blue-600 font-bold transition-all duration-300 group">
-							<div class="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center text-white text-sm font-bold group-hover:scale-110 transition-transform">
-								FG
-							</div>
-							<span class="hidden lg:inline">Franco</span>
-						</a>
-					</li>
-					
-					<!-- Separador visual -->
-					<li class="hidden md:block">
-						<div class="w-px h-6 bg-slate-200"></div>
-					</li>
-					
-					<!-- Enlaces de navegación -->
-					<li>
-						<a href="#about" class="text-slate-600 hover:text-slate-900 font-medium transition-all duration-300 relative group">
-							<span class="flex items-center gap-2">
-								<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-								</svg>
-								About
-							</span>
-							<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full"></span>
-						</a>
-					</li>
-					<li>
-						<a href="#projects" class="text-slate-600 hover:text-slate-900 font-medium transition-all duration-300 relative group">
-							<span class="flex items-center gap-2">
-								<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-								</svg>
-								Projects
-							</span>
-							<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full"></span>
-						</a>
-					</li>
-					<li>
-						<a href="/projects" class="text-slate-600 hover:text-slate-900 font-medium transition-all duration-300 relative group">
-							<span class="flex items-center gap-2">
-								<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
-								</svg>
-								<span class="hidden lg:inline">All Projects</span>
-								<span class="lg:hidden">All</span>
-							</span>
-							<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full"></span>
-						</a>
-					</li>
-					
-					<!-- Botón Contact destacado -->
-					<li>
-						<a href="#contact" class="bg-blue-600 text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-blue-700 transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl hover:shadow-blue-600/25 hover:-translate-y-0.5">
-							<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-							</svg>
-							contact
-						</a>
-					</li>
-				</ul>
+	<!-- Navegación Flotante -->
+	<nav class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 bg-white/90 backdrop-blur-lg rounded-full px-6 py-3 shadow-lg border border-slate-200/20">
+		<div class="flex items-center gap-8">
+			<!-- Logo/Nombre centrado -->
+			<a href="/" class="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+				FG
+			</a>
+			
+			<!-- Enlaces de navegación con iconos -->
+			<div class="flex items-center gap-6">
+				<a href={isProjectsPage ? "/#about" : "#about"} class="flex items-center gap-2 text-slate-600 hover:text-slate-900 transition-colors text-sm font-medium">
+					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+					</svg>
+					<span>About</span>
+				</a>
+				<a href="/projects" class={`flex items-center gap-2 text-sm font-medium transition-colors ${isProjectsPage ? 'text-blue-600 font-semibold' : 'text-slate-600 hover:text-slate-900'}`}>
+					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+					</svg>
+					<span>Projects</span>
+				</a>
+				<a href={isProjectsPage ? "/#contact" : "#contact"} class="flex items-center gap-2 text-slate-600 hover:text-slate-900 transition-colors text-sm font-medium">
+					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+					</svg>
+					<span>Contact</span>
+				</a>
 			</div>
-		</nav>
-
-		<main>
+		</div>
+	</nav>
+			<main class="pt-4">
 			<slot />
 		</main>
 		
@@ -114,11 +81,7 @@ const { title = "Franco Gaggero - Full Stack Developer", description = "Portfoli
 					</div>
 					
 					<div class="flex items-center gap-3">
-						<span class="text-slate-600">Designed</span>
-						<svg class="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 24 24">
-							<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-						</svg>
-						<span class="text-slate-600">using</span>
+						<span class="text-slate-600">Designed using</span>												
 						<a href="https://astro.build/" target="_blank" class="inline-flex items-center gap-1 text-orange-600 hover:text-orange-700 font-medium transition-colors group">
 							<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
 								<path d="M16.074 16.86c-.72.616-2.157 1.025-3.812 1.025-3.644 0-6.265-2.303-6.265-5.525 0-3.963 3.63-6.27 7.045-6.27 3.878 0 6.635 2.652 6.635 6.265 0 4.613-3.862 7.145-8.42 7.145C5.112 19.5 0 14.861 0 8.645 0 2.983 4.023 0 9.536 0c4.438 0 8.42 2.652 8.42 7.5 0 3.96-2.637 6.86-6.175 6.86-1.353 0-2.558-.614-3.015-1.506 0 0-.717 2.652-2.558 2.652-.976 0-1.792-.614-1.792-1.794 0-1.025.41-2.558 1.230-5.525.41-1.484.615-2.558.615-3.237 0-.821-.41-1.23-1.025-1.23-.821 0-1.64.819-1.64 2.047 0 .41.205 1.025.205 1.64 0 3.644-2.558 6.27-5.73 6.27-1.948 0-3.237-1.284-3.237-3.237 0-2.863 2.047-4.608 4.814-4.608 1.025 0 1.794.41 1.794 1.025 0 .615-.41 1.025-1.025 1.025-.41 0-.615-.205-.615-.615 0-.205.205-.41.205-.615 0-.205-.205-.41-.615-.41-.821 0-1.435.82-1.435 1.845 0 .82.41 1.435 1.23 1.435 1.640 0 2.558-1.64 2.558-3.685 0-.82-.205-1.64-.205-2.047 0-2.047 1.435-3.685 3.482-3.685 1.435 0 2.558.82 2.558 2.558 0 .82-.205 1.845-.82 4.198-.41 1.435-.615 2.46-.615 3.075 0 .615.205.82.615.82.615 0 1.23-.615 1.435-1.435.205-.615.41-1.64.41-2.558 0-3.075-1.845-4.813-4.403-4.813-2.967 0-4.813 2.047-4.813 4.403 0 2.352 1.435 3.685 3.482 3.685 1.025 0 1.845-.41 2.352-.82z"/>
@@ -136,91 +99,35 @@ const { title = "Franco Gaggero - Full Stack Developer", description = "Portfoli
 <!--Smooth scroll Script  -->
 <script>
 	document.addEventListener('DOMContentLoaded', () => {
-		// Agregar ID al inicio de la página para el enlace "FG"
+		// Agregar ID al inicio de la página
 		document.body.id = 'top';
 		
-		// Detectar si estamos en la página de proyectos o INDEX
+		// Scroll suave para enlaces internos (solo en home)
 		const isProjectsPage = window.location.pathname === '/projects' || window.location.pathname === '/projects/';
 		
-		// Mejorar scroll suave para todos los enlaces internos
-		document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-			anchor.addEventListener('click', function (e) {
-				const target = e.currentTarget as HTMLAnchorElement;
-				const href = target.getAttribute('href');
-				
-				// Si estamos en /projects y clickeamos un enlace a sección, ir a la home primero
-				if (isProjectsPage && href && href !== '#top') {
-					window.location.href = '/' + href;
-					return;
-				}
-				
-				e.preventDefault();
-				if (href === '#top') {
-					window.scrollTo({
-						top: 0,
-						behavior: 'smooth'
-					});
-				} else if (href) {
-					const element = document.querySelector(href);
-					if (element) {
-						element.scrollIntoView({
-							behavior: 'smooth',
-							block: 'start'
-						});
-					}
-				}
-			});
-		});
-		
-		// Solo activar la detección de scroll en la página principal
 		if (!isProjectsPage) {
-			// Resaltar enlace activo basado en scroll
-			const sections = ['top', 'about', 'projects', 'contact'];
-			const navLinks = document.querySelectorAll('nav a[href^="#"]');
-			
-			function updateActiveLink() {
-				const scrollY = window.pageYOffset;
-				const windowHeight = window.innerHeight;
-				
-				// Si está en la parte superior, activar "Home"
-				if (scrollY < windowHeight * 0.2) {
-					navLinks.forEach(link => link.classList.remove('active'));
-					document.querySelector('a[href="#top"]')?.classList.add('active');
-					return;
-				}
-				
-				// Encontrar la sección actual
-				let current = '';
-				sections.forEach(section => {
-					const element = document.getElementById(section);
-					if (element) {
-						const rect = element.getBoundingClientRect();
-						if (rect.top <= 100 && rect.bottom >= 100) {
-							current = section;
+			document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+				anchor.addEventListener('click', function (e: Event) {
+					e.preventDefault();
+					const target = e.currentTarget as HTMLAnchorElement;
+					const href = target.getAttribute('href');
+					
+					if (href === '#top') {
+						window.scrollTo({
+							top: 0,
+							behavior: 'smooth'
+						});
+					} else if (href) {
+						const element = document.querySelector(href);
+						if (element) {
+							element.scrollIntoView({
+								behavior: 'smooth',
+								block: 'start'
+							});
 						}
 					}
 				});
-				
-				// Actualizar clases activas
-				navLinks.forEach(link => {
-					link.classList.remove('active');
-					if (link.getAttribute('href') === `#${current}`) {
-						link.classList.add('active');
-					}
-				});
-			}
-			
-			// Escuchar scroll
-			window.addEventListener('scroll', updateActiveLink);
-			updateActiveLink(); // Llamar una vez al cargar
-		} else {
-			// En la página de proyectos, marcar "All Projects" como activo
-			const navLinks = document.querySelectorAll('nav a');
-			navLinks.forEach(link => link.classList.remove('active'));
-			const allProjectsLink = document.querySelector('nav a[href="/projects"]');
-			if (allProjectsLink) {
-				allProjectsLink.classList.add('active');
-			}
+			});
 		}
 	});
 </script>
@@ -244,107 +151,71 @@ const { title = "Franco Gaggero - Full Stack Developer", description = "Portfoli
 		}
 	}
 
-	/* Responsive navigation */
-	@media (max-width: 1024px) {
-		nav {
-			top: 1rem;
-			padding: 0 1rem;
-		}
-		nav > div {
-			padding: 0.75rem 1.5rem;
-		}
-		nav ul {
-			gap: 1.5rem;
-		}
+	/* Navegación flotante */
+	nav {
+		backdrop-filter: blur(20px);
+		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+		border: 1px solid rgba(255, 255, 255, 0.2);
 	}
 	
+	/* Enlaces de navegación con iconos */
+	nav a {
+		transition: all 0.3s ease;
+	}
+	
+	nav a:hover {
+		color: #1e293b !important;
+	}
+	
+	/* Efectos hover para iconos */
+	nav a:hover svg {
+		transform: scale(1.1);
+		transition: transform 0.2s ease;
+	}
+	
+	/* Estilo activo para Projects */
+	nav a[href="/projects"] svg {
+		transition: all 0.3s ease;
+	}
+	
+	/* Logo más destacado */
+	nav a[href="/"] {
+		letter-spacing: -0.025em;
+		font-weight: 700;
+	}
+	
+	/* Responsive design */
 	@media (max-width: 768px) {
 		nav {
-			top: 1rem;
-			padding: 0 1rem;
-		}
-		nav > div {
-			padding: 0.75rem 1rem;
-		}
-		nav ul {
-			gap: 1rem;
-		}
-		nav ul li a {
-			font-size: 0.875rem;
-		}
-		nav ul li a[href="#contact"] {
 			padding: 0.5rem 1rem;
 		}
-		/* Ocultar algunos elementos en móvil */
-		nav .hidden.lg\\:inline {
-			display: none !important;
+		
+		nav .flex {
+			gap: 1rem;
+		}
+		
+		nav a[href="/"] {
+			font-size: 1.125rem;
+		}
+		
+		/* En móvil, mostrar solo iconos */
+		nav a span {
+			display: none;
 		}
 	}
 	
 	@media (max-width: 640px) {
 		nav {
-			top: 0.75rem;
-			padding: 0 0.75rem;
-		}
-		nav > div {
-			padding: 0.5rem 0.75rem;
-		}
-		nav ul {
-			gap: 0.75rem;
-		}
-		nav ul li a {
-			font-size: 0.8rem;
-		}
-		nav ul li a[href="#contact"] {
 			padding: 0.375rem 0.75rem;
 		}
-		/* Navegación compacta en móvil */
-		nav ul li span {
-			display: none;
+		
+		nav .flex {
+			gap: 0.75rem;
 		}
-		nav ul li svg {
-			width: 1rem;
-			height: 1rem;
+		
+		/* Enlaces más compactos en móvil */
+		nav a {
+			font-size: 0.875rem;
 		}
-		/* Ocultar dropdown en móvil muy pequeño */
-		nav .relative.group {
-			display: none;
-		}
-	}
-	
-	/* Smooth hover para dropdown */
-	.group:hover .group-hover\\:opacity-100 {
-		opacity: 1;
-		visibility: visible;
-		transform: translateY(0);
-	}
-	
-	.group .group-hover\\:opacity-100 {
-		transform: translateY(-10px);
-		transition: all 0.2s ease-out;
-	}
-	
-	/* Estilos para enlaces activos */
-	nav a.active {
-		color: #1e293b !important;
-		font-weight: 600;
-	}
-	
-	nav a.active span.absolute {
-		width: 100% !important;
-	}
-	
-	nav a[href="#top"].active div {
-		transform: scale(1.1);
-		box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-	}
-	
-	/* Animación suave para cambios */
-	nav a {
-		transition: all 0.3s ease;
-	}
-	
-	nav a span.absolute {
-		transition: width 0.3s ease;
 	}
 </style>
