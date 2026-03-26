@@ -98,3 +98,29 @@ body {
   opacity: 1;
   transform: scale(1);
 }
+
+/* Compact tech stack cards on mobile */
+@media (max-width: 639px) {
+  .tech-stack-grid > .group {
+    padding: 0.5rem 0.625rem;
+  }
+  .tech-stack-grid > .group .flex.items-center {
+    gap: 0.5rem;
+  }
+  .tech-stack-grid > .group .flex.items-center > div:first-child {
+    width: 2rem;
+    height: 2rem;
+    min-width: 2rem;
+  }
+  .tech-stack-grid > .group .flex.items-center > div:first-child svg {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+  .tech-stack-grid > .group .font-semibold {
+    font-size: 0.8125rem;
+    line-height: 1.2;
+  }
+  .tech-stack-grid > .group .text-sm.text-slate-400 {
+    display: none;
+  }
+}
