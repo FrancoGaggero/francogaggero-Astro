@@ -2,25 +2,30 @@
 import GradualBlur from './GradualBlur.jsx';
 ---
 
-<section class="min-h-screen bg-slate-950 text-white flex items-center relative overflow-hidden" id="hero">
+<section class="min-h-screen bg-slate-950 text-white flex items-center relative overflow-hidden" id="hero" data-parallax-scope>
 	<!-- Fondo con grid sutil -->
-	<div class="absolute inset-0 bg-[linear-gradient(rgba(148,163,184,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.03)_1px,transparent_1px)] bg-[size:60px_60px]"></div>
+	<div class="absolute inset-0 bg-[linear-gradient(rgba(148,163,184,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.03)_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_40%,transparent_100%)]"></div>
 
-	<!-- Gradient orbs -->
+	<!-- Spotlight que sigue el cursor -->
+	<div class="spotlight" data-spotlight></div>
+
+	<!-- Gradient orbs (parallax) -->
 	<div class="absolute inset-0 overflow-hidden">
-		<div class="absolute top-1/4 -left-32 w-[500px] h-[500px] bg-blue-600/15 rounded-full blur-[120px] hero-orb-1"></div>
-		<div class="absolute bottom-1/4 -right-32 w-[400px] h-[400px] bg-violet-600/15 rounded-full blur-[120px] hero-orb-2"></div>
-		<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-600/8 rounded-full blur-[150px]"></div>
+		<div class="absolute top-1/4 -left-32 w-[500px] h-[500px] bg-blue-600/15 rounded-full blur-[120px] hero-orb-1" data-parallax="34"></div>
+		<div class="absolute bottom-1/4 -right-32 w-[400px] h-[400px] bg-violet-600/15 rounded-full blur-[120px] hero-orb-2" data-parallax="26"></div>
+		<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-600/8 rounded-full blur-[150px]" data-parallax="16"></div>
 	</div>
 
-	<!-- Partículas de fondo -->
-	<div class="absolute inset-0 overflow-hidden pointer-events-none">
+	<!-- Partículas de fondo (parallax reactivo) -->
+	<div class="absolute inset-0 overflow-hidden pointer-events-none" data-parallax="60">
 		<div class="hero-particle absolute w-1 h-1 bg-blue-400/40 rounded-full" style="top:15%;left:10%;animation-delay:0s"></div>
 		<div class="hero-particle absolute w-1.5 h-1.5 bg-violet-400/30 rounded-full" style="top:25%;left:80%;animation-delay:2s"></div>
 		<div class="hero-particle absolute w-1 h-1 bg-indigo-400/40 rounded-full" style="top:60%;left:20%;animation-delay:4s"></div>
 		<div class="hero-particle absolute w-1.5 h-1.5 bg-blue-400/30 rounded-full" style="top:75%;left:70%;animation-delay:1s"></div>
 		<div class="hero-particle absolute w-1 h-1 bg-purple-400/40 rounded-full" style="top:40%;left:90%;animation-delay:3s"></div>
 		<div class="hero-particle absolute w-1 h-1 bg-cyan-400/30 rounded-full" style="top:85%;left:45%;animation-delay:5s"></div>
+		<div class="hero-particle absolute w-1 h-1 bg-blue-300/30 rounded-full" style="top:35%;left:35%;animation-delay:2.5s"></div>
+		<div class="hero-particle absolute w-1.5 h-1.5 bg-indigo-400/25 rounded-full" style="top:55%;left:60%;animation-delay:4.5s"></div>
 	</div>
 
 	<div class="max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center relative z-10 py-20">
@@ -56,16 +61,17 @@ import GradualBlur from './GradualBlur.jsx';
 			
 			<!-- CTAs principales -->
 			<div class="flex flex-col sm:flex-row gap-4 hero-fade-up" style="animation-delay:0.5s">
-				<a href="#contact" 
-				   class="group relative bg-gradient-to-r from-blue-600 to-violet-600 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:shadow-2xl hover:shadow-blue-600/25 hover:-translate-y-1 flex items-center justify-center gap-2 overflow-hidden">
+				<a href="#contact" data-magnetic="0.4" data-magnetic-lift="4"
+				   class="group relative bg-gradient-to-r from-blue-600 to-violet-600 text-white px-8 py-4 rounded-xl font-semibold shadow-lg shadow-blue-600/20 hover:shadow-2xl hover:shadow-blue-600/40 transition-shadow duration-300 flex items-center justify-center gap-2 overflow-hidden">
 					<span class="absolute inset-0 bg-gradient-to-r from-blue-500 to-violet-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+					<span class="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out bg-gradient-to-r from-transparent via-white/25 to-transparent"></span>
 					<span class="relative">Let's work together</span>
 					<svg class="w-4 h-4 relative transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
 					</svg>
 				</a>
-				<a href="#about" 
-				   class="group border border-slate-700 text-slate-300 px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:border-slate-500 hover:text-white hover:bg-white/5 hover:-translate-y-1 backdrop-blur-sm flex items-center justify-center gap-2">
+				<a href="#about" data-magnetic="0.4" data-magnetic-lift="4"
+				   class="group border border-slate-700 text-slate-300 px-8 py-4 rounded-xl font-semibold transition-colors duration-300 hover:border-slate-500 hover:text-white hover:bg-white/5 backdrop-blur-sm flex items-center justify-center gap-2">
 					View my work
 					<svg class="w-4 h-4 transition-transform group-hover:translate-y-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
@@ -117,17 +123,20 @@ import GradualBlur from './GradualBlur.jsx';
 		
 		<!-- Imagen de perfil con tarjeta glassmorphism -->
 		<div class="lg:col-span-5 flex justify-center lg:justify-end hero-fade-up" style="animation-delay:0.4s">
-			<div class="relative group">
+			<div class="relative group" data-tilt="10">
 				<!-- Glow detrás de la imagen -->
-				<div class="absolute -inset-4 bg-gradient-to-r from-blue-600/20 via-violet-600/20 to-indigo-600/20 rounded-[2rem] blur-2xl opacity-60 group-hover:opacity-80 transition-opacity duration-700"></div>
-				
+				<div class="absolute -inset-4 bg-gradient-to-r from-blue-600/20 via-violet-600/20 to-indigo-600/20 rounded-[2rem] blur-2xl opacity-60 group-hover:opacity-90 transition-opacity duration-700"></div>
+
 				<!-- Imagen principal -->
-				<div class="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-[22rem] lg:h-[22rem] rounded-2xl overflow-hidden ring-1 ring-white/10 shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]">
-					<img src="/images/portada.jpeg" alt="Franco Gaggero" 
+				<div class="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-[24rem] lg:h-[26rem] rounded-2xl overflow-hidden ring-1 ring-white/10 shadow-2xl">
+					<img src="/images/portada.jpeg" alt="Franco Gaggero"
 						 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-					
+
 					<!-- Overlay gradiente -->
 					<div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent"></div>
+
+					<!-- Glare del tilt -->
+					<div class="tilt-glare" data-tilt-glare></div>
 					
 					<!-- Nombre overlay inferior -->
 					<div class="absolute bottom-0 left-0 right-0 p-5">

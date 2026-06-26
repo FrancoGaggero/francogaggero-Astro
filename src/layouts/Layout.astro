@@ -131,7 +131,7 @@ const isProjectsPage = currentPath === '/projects' || currentPath === '/projects
 		}
 
 		// Scroll reveal observer
-		const revealElements = document.querySelectorAll('.scroll-reveal, .scroll-reveal-left, .scroll-reveal-right, .scroll-reveal-scale');
+		const revealElements = document.querySelectorAll('.scroll-reveal, .scroll-reveal-left, .scroll-reveal-right, .scroll-reveal-scale, .stagger-reveal');
 		if (revealElements.length > 0) {
 			const revealObserver = new IntersectionObserver((entries) => {
 				entries.forEach((entry) => {
@@ -147,6 +147,102 @@ const isProjectsPage = currentPath === '/projects' || currentPath === '/projects
 			}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
 			revealElements.forEach(el => revealObserver.observe(el));
+		}
+
+		// ===== Motion Engine =====
+		const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		const isFinePointer = window.matchMedia('(pointer: fine)').matches;
+
+		if (!prefersReduced && isFinePointer) {
+			// --- 3D Tilt ---
+			document.querySelectorAll<HTMLElement>('[data-tilt]').forEach((el) => {
+				const strength = parseFloat(el.dataset.tilt || '8');
+				const glare = el.querySelector<HTMLElement>('[data-tilt-glare]');
+				let raf = 0;
+				el.style.transition = 'transform 0.4s cubic-bezier(0.16,1,0.3,1)';
+				el.addEventListener('mousemove', (e) => {
+					const rect = el.getBoundingClientRect();
+					const px = (e.clientX - rect.left) / rect.width;
+					const py = (e.clientY - rect.top) / rect.height;
+					const rx = (0.5 - py) * strength;
+					const ry = (px - 0.5) * strength;
+					if (raf) cancelAnimationFrame(raf);
+					raf = requestAnimationFrame(() => {
+						el.style.transition = 'transform 0.08s linear';
+						el.style.transform = `perspective(1100px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(0)`;
+						if (glare) {
+							glare.style.opacity = '1';
+							glare.style.background = `radial-gradient(circle at ${px * 100}% ${py * 100}%, rgba(255,255,255,0.18), transparent 55%)`;
+						}
+					});
+				});
+				el.addEventListener('mouseleave', () => {
+					if (raf) cancelAnimationFrame(raf);
+					el.style.transition = 'transform 0.5s cubic-bezier(0.16,1,0.3,1)';
+					el.style.transform = 'perspective(1100px) rotateX(0) rotateY(0)';
+					if (glare) glare.style.opacity = '0';
+				});
+			});
+
+			// --- Magnetic ---
+			document.querySelectorAll<HTMLElement>('[data-magnetic]').forEach((el) => {
+				const strength = parseFloat(el.dataset.magnetic || '0.35');
+				const lift = parseFloat(el.dataset.magneticLift || '0');
+				let raf = 0;
+				el.style.transition = 'transform 0.4s cubic-bezier(0.16,1,0.3,1)';
+				el.addEventListener('mousemove', (e) => {
+					const rect = el.getBoundingClientRect();
+					const x = (e.clientX - rect.left - rect.width / 2) * strength;
+					const y = (e.clientY - rect.top - rect.height / 2) * strength;
+					if (raf) cancelAnimationFrame(raf);
+					raf = requestAnimationFrame(() => {
+						el.style.transition = 'transform 0.15s ease-out';
+						el.style.transform = `translate(${x}px, ${y - lift}px)`;
+					});
+				});
+				el.addEventListener('mouseleave', () => {
+					if (raf) cancelAnimationFrame(raf);
+					el.style.transition = 'transform 0.5s cubic-bezier(0.16,1,0.3,1)';
+					el.style.transform = 'translate(0, 0)';
+				});
+			});
+
+			// --- Mouse Parallax + Spotlight (per scope) ---
+			document.querySelectorAll<HTMLElement>('[data-parallax-scope]').forEach((scope) => {
+				const layers = Array.from(scope.querySelectorAll<HTMLElement>('[data-parallax]'));
+				const spotlight = scope.querySelector<HTMLElement>('[data-spotlight]');
+				let raf = 0;
+				let tx = 0, ty = 0, cx = 0, cy = 0;
+				scope.addEventListener('mousemove', (e) => {
+					const rect = scope.getBoundingClientRect();
+					tx = (e.clientX - rect.left) / rect.width - 0.5;
+					ty = (e.clientY - rect.top) / rect.height - 0.5;
+					if (spotlight) {
+						spotlight.style.setProperty('--mx', `${e.clientX - rect.left}px`);
+						spotlight.style.setProperty('--my', `${e.clientY - rect.top}px`);
+						spotlight.style.opacity = '1';
+					}
+					if (!raf) raf = requestAnimationFrame(tick);
+				});
+				scope.addEventListener('mouseleave', () => {
+					tx = 0; ty = 0;
+					if (spotlight) spotlight.style.opacity = '0';
+					if (!raf) raf = requestAnimationFrame(tick);
+				});
+				function tick() {
+					cx += (tx - cx) * 0.08;
+					cy += (ty - cy) * 0.08;
+					layers.forEach((layer) => {
+						const depth = parseFloat(layer.dataset.parallax || '20');
+						layer.style.transform = `translate3d(${cx * depth}px, ${cy * depth}px, 0)`;
+					});
+					if (Math.abs(tx - cx) > 0.001 || Math.abs(ty - cy) > 0.001) {
+						raf = requestAnimationFrame(tick);
+					} else {
+						raf = 0;
+					}
+				}
+			});
 		}
 	});
 </script>

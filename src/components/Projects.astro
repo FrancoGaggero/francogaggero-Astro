@@ -29,12 +29,13 @@ import GradualBlur from './GradualBlur.jsx';
 		<!-- Grid de proyectos -->
 		<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
 			<!-- Proyecto 1: TaskManager Pro -->
-			<div class="group bg-white/5 backdrop-blur-xl rounded-2xl overflow-hidden border border-white/10 hover:border-white/20 shadow-lg shadow-black/10 hover:shadow-2xl hover:shadow-blue-500/5 transition-all duration-500 hover:-translate-y-2 scroll-reveal-left" data-delay="100">
+			<div class="group bg-white/5 backdrop-blur-xl rounded-2xl overflow-hidden border border-white/10 hover:border-white/20 shadow-lg shadow-black/10 hover:shadow-2xl hover:shadow-blue-500/10 scroll-reveal-left" data-delay="100" data-tilt="5">
 				<div class="relative overflow-hidden">
 					<div class="h-64 bg-gradient-to-br from-amber-500 via-orange-500 to-red-500">
 						<img src="/images/taskmanager.png" alt="TaskManager Pro" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
 					</div>
 					<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+					<div class="tilt-glare" data-tilt-glare></div>
 					<div class="absolute top-4 right-4 bg-white/20 backdrop-blur-sm rounded-lg px-3 py-1 text-white text-sm font-medium">
 						Full Stack
 					</div>
@@ -73,12 +74,13 @@ import GradualBlur from './GradualBlur.jsx';
 			</div>
 			
 			<!-- Proyecto 2: Landing Page Orange Studio -->
-			<div class="group bg-white/5 backdrop-blur-xl rounded-2xl overflow-hidden border border-white/10 hover:border-white/20 shadow-lg shadow-black/10 hover:shadow-2xl hover:shadow-blue-500/5 transition-all duration-500 hover:-translate-y-2 scroll-reveal-right" data-delay="200">
+			<div class="group bg-white/5 backdrop-blur-xl rounded-2xl overflow-hidden border border-white/10 hover:border-white/20 shadow-lg shadow-black/10 hover:shadow-2xl hover:shadow-blue-500/10 scroll-reveal-right" data-delay="200" data-tilt="5">
 				<div class="relative overflow-hidden">
 					<div class="h-64 bg-gradient-to-br from-orange-500 via-pink-500 to-red-600 relative">
-						<img src="/images/orangestudio.png" alt="Orange Studio Landing Page" class="w-full h-full object-cover">
+						<img src="/images/orangestudio.png" alt="Orange Studio Landing Page" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
 					</div>
 					<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+					<div class="tilt-glare" data-tilt-glare></div>
 				</div>
 				
 				<div class="p-8">
@@ -116,9 +118,10 @@ import GradualBlur from './GradualBlur.jsx';
 		
 		<!-- CTA para ver más proyectos -->
 		<div class="text-center scroll-reveal" data-delay="300">
-			<a href="/projects" class="group inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-violet-600 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:shadow-xl hover:shadow-blue-600/20 hover:-translate-y-1">
-				View All Projects
-				<svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+			<a href="/projects" data-magnetic="0.4" data-magnetic-lift="3" class="group relative inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-violet-600 text-white px-8 py-4 rounded-xl font-semibold shadow-lg shadow-blue-600/20 hover:shadow-xl hover:shadow-blue-600/40 transition-shadow duration-300 overflow-hidden">
+				<span class="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out bg-gradient-to-r from-transparent via-white/25 to-transparent"></span>
+				<span class="relative">View All Projects</span>
+				<svg class="w-4 h-4 relative transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
 				</svg>
 			</a>

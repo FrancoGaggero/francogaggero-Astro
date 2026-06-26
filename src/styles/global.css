@@ -99,6 +99,91 @@ body {
   transform: scale(1);
 }
 
+/* Staggered reveal: child elements cascade in */
+.stagger-reveal > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.stagger-reveal.revealed > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+.stagger-reveal.revealed > *:nth-child(1) { transition-delay: 0.04s; }
+.stagger-reveal.revealed > *:nth-child(2) { transition-delay: 0.08s; }
+.stagger-reveal.revealed > *:nth-child(3) { transition-delay: 0.12s; }
+.stagger-reveal.revealed > *:nth-child(4) { transition-delay: 0.16s; }
+.stagger-reveal.revealed > *:nth-child(5) { transition-delay: 0.20s; }
+.stagger-reveal.revealed > *:nth-child(6) { transition-delay: 0.24s; }
+.stagger-reveal.revealed > *:nth-child(7) { transition-delay: 0.28s; }
+.stagger-reveal.revealed > *:nth-child(8) { transition-delay: 0.32s; }
+.stagger-reveal.revealed > *:nth-child(n+9) { transition-delay: 0.36s; }
+
+/* Cursor spotlight overlay (used with [data-spotlight]) */
+.spotlight {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  background: radial-gradient(
+    600px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(99, 102, 241, 0.10),
+    transparent 60%
+  );
+}
+
+/* Tilt glare highlight (used with [data-tilt-glare]) */
+.tilt-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  border-radius: inherit;
+  transition: opacity 0.4s ease;
+  mix-blend-mode: overlay;
+}
+
+/* Animated conic border for feature cards */
+@property --border-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.animated-border {
+  position: relative;
+}
+.animated-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--border-angle),
+    transparent 0%,
+    rgba(96, 165, 250, 0.6) 15%,
+    rgba(167, 139, 250, 0.6) 30%,
+    transparent 45%,
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: border-spin 6s linear infinite;
+  pointer-events: none;
+}
+@keyframes border-spin {
+  to { --border-angle: 360deg; }
+}
+
+/* Will-change hint for motion-engine targets */
+[data-tilt], [data-magnetic], [data-parallax] {
+  will-change: transform;
+}
+
 /* Compact tech stack cards on mobile */
 @media (max-width: 639px) {
   .tech-stack-grid > .group {
