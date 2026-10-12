@@ -2,7 +2,7 @@
 import type { Lang } from '../i18n/ui';
 import { useTranslations, alternatePath } from '../i18n/utils';
 import { featuredProjects, projects, PLAY_STORE_URL } from '../data/projects';
-import { stack, workflows, learning } from '../data/stack';
+import { stack, workflows } from '../data/stack';
 import { timeline } from '../data/timeline';
 import type { TerminalData } from '../scripts/terminal';
 
@@ -15,45 +15,69 @@ const data: TerminalData = {
 	lang,
 	altUrl: alternatePath(Astro.url, lang === 'es' ? 'en' : 'es'),
 	email: 'gaggero25@gmail.com',
+	site: 'https://francogaggero.netlify.app',
 	projects: featuredProjects.map((p) => ({ title: p.title, desc: p.desc[lang], url: p.live ?? p.playStore, repo: p.repo })),
+	projectCount: projects.length,
 	stack: stack.map((c) => ({ id: c.id, label: c.label[lang], items: c.items.map((i) => i.name) })),
-	learning: learning.map((l) => l.name),
 	workflows: workflows.map((w) => w.name),
 	timeline: timeline.map((c) => ({ date: c.date, type: c.type, msg: c.msg[lang] })),
 	game: { title: capibara.title, url: PLAY_STORE_URL },
 };
-const suggestions = ['help', 'whoami', 'skills', 'skills testing', 'projects', 'experience', 'contact', 'sudo hire-me'];
+const suggestions = ['help', 'neofetch', 'npm test', 'npm run deploy', 'skills devops', 'projects', 'theme amber', 'sudo hire-me'];
 ---
 
 <section id="terminal" class="relative overflow-x-clip py-28 sm:py-36">
 	<div class="pointer-events-none absolute inset-0" aria-hidden="true">
 		<div class="absolute left-1/2 top-1/2 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-500/[0.07] blur-[130px]"></div>
 	</div>
-	<div class="relative mx-auto max-w-4xl px-6">
+	<div class="relative mx-auto max-w-6xl px-6">
 		<p class="kicker reveal">{t('terminal.kicker')}</p>
 		<h2 class="reveal mt-5 font-display text-4xl font-bold leading-tight tracking-tight text-white sm:text-6xl" style="--d:80ms">
 			{t('terminal.title1')} <span class="text-gradient">{t('terminal.title2')}</span>
 		</h2>
-		<p class="reveal mt-4 text-slate-400" style="--d:140ms">{t('terminal.body')} <kbd class="ml-1 rounded border border-white/15 bg-white/5 px-1.5 py-0.5 font-mono text-xs text-slate-300">/</kbd></p>
+		<p class="reveal mt-4 max-w-2xl text-slate-400" style="--d:140ms">{t('terminal.body')} <kbd class="ml-1 rounded border border-white/15 bg-white/5 px-1.5 py-0.5 font-mono text-xs text-slate-300">/</kbd></p>
 
-		<div id="term" class="reveal relative mt-10 overflow-hidden rounded-2xl border border-white/10 bg-[#07080d]/90 font-mono text-[13px] shadow-[0_30px_100px_-30px_rgba(52,211,153,0.35)] sm:text-sm" style="--d:200ms">
-			<div class="flex items-center gap-2 border-b border-white/5 px-4 py-3">
-				<span class="h-3 w-3 rounded-full bg-[#ff5f57]"></span>
-				<span class="h-3 w-3 rounded-full bg-[#febc2e]"></span>
-				<span class="h-3 w-3 rounded-full bg-[#28c840]"></span>
-				<span class="ml-3 text-xs text-slate-500">franco@portfolio — zsh</span>
+		<div class="mt-10 grid items-stretch gap-6 lg:grid-cols-[0.85fr_1.15fr]">
+			<!-- 3D robot + rocket -->
+			<div class="reveal flex flex-col" style="--d:160ms">
+				<div id="robot-scene" class="relative h-[320px] w-full overflow-hidden rounded-2xl border border-white/10 bg-[#07080d] shadow-[0_30px_100px_-30px_rgba(34,211,238,0.35)] sm:h-[420px] lg:h-auto lg:min-h-[470px] lg:flex-1" role="img" aria-label={t('terminal.sceneAlt')}>
+					<!-- static fallback (reduced motion / no WebGL); removed once the 3D scene mounts -->
+					<div data-scene-fallback class="absolute inset-0 flex items-end justify-center gap-10 pb-16 text-7xl">
+						<span class="animate-floaty">🤖</span>
+						<span data-fallback-rocket class="transition-transform duration-[1200ms] ease-in">🚀</span>
+					</div>
+					<div class="pointer-events-none absolute left-4 top-4 rounded-full border border-white/10 bg-black/40 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-slate-400 backdrop-blur">
+						<span class="mr-1.5 inline-block h-1.5 w-1.5 animate-pulse-dot rounded-full bg-emerald-400 align-middle"></span>robot@coding
+					</div>
+				</div>
+				<button type="button" data-deploy class="btn-primary mt-4 w-full !py-3.5 disabled:cursor-wait disabled:opacity-60">
+					<span data-deploy-label>{t('terminal.deploy')}</span>
+				</button>
 			</div>
-			<div data-term-body class="h-[380px] cursor-text overflow-y-auto px-4 py-4 leading-relaxed text-slate-300 sm:px-6" data-lenis-prevent>
-				<div data-term-out aria-live="polite"></div>
-				<form class="flex items-center gap-2" autocomplete="off">
-					<label for="term-input" class="shrink-0"><span class="text-emerald-300">franco@portfolio</span><span class="text-slate-500">:~$</span></label>
-					<input id="term-input" data-term-input type="text" spellcheck="false" autocapitalize="off" class="min-w-0 flex-1 bg-transparent text-white caret-cyan-300 outline-none placeholder:text-slate-600" placeholder={t('terminal.placeholder')} />
-				</form>
-			</div>
-			<div class="flex gap-2 overflow-x-auto border-t border-white/5 px-4 py-3 [scrollbar-width:none] sm:px-6">
-				{suggestions.map((s) => (
-					<button type="button" data-term-suggest={s} class="shrink-0 rounded-md border border-white/10 bg-white/[0.03] px-2.5 py-1 text-xs text-slate-300 transition-colors hover:border-cyan-300/50 hover:text-white">{s}</button>
-				))}
+
+			<!-- Terminal window -->
+			<div id="term" class="term reveal relative flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#07080d]/95 font-mono text-[13px] sm:text-sm" data-theme="cyan" style="--d:220ms">
+				<div class="flex items-center gap-2 border-b border-white/5 px-4 py-3">
+					<button type="button" data-term-close class="term-dot bg-[#ff5f57]" aria-label="clear"><span>×</span></button>
+					<button type="button" data-term-min class="term-dot bg-[#febc2e]" aria-label="minimize"><span>–</span></button>
+					<button type="button" data-term-max class="term-dot bg-[#28c840]" aria-label="maximize"><span>+</span></button>
+					<span class="ml-3 truncate text-xs text-slate-500">franco@portfolio — zsh — 80×24</span>
+				</div>
+				<div data-term-body class="term-body h-[440px] cursor-text overflow-y-auto px-4 py-4 leading-relaxed text-slate-300 sm:px-6" data-lenis-prevent>
+					<div data-term-out aria-live="polite"></div>
+					<form class="flex items-center gap-2" autocomplete="off">
+						<label for="term-input" class="shrink-0"><span class="t-prompt">franco@portfolio</span><span class="t-dim">:~$</span></label>
+						<span class="relative min-w-0 flex-1">
+							<span data-term-ghost class="pointer-events-none absolute inset-0 overflow-hidden whitespace-pre text-slate-600" aria-hidden="true"></span>
+							<input id="term-input" data-term-input type="text" spellcheck="false" autocapitalize="off" class="term-input relative w-full bg-transparent text-white outline-none placeholder:text-slate-600" placeholder={t('terminal.placeholder')} />
+						</span>
+					</form>
+				</div>
+				<div class="term-suggest flex gap-2 overflow-x-auto border-t border-white/5 px-4 py-3 [scrollbar-width:none] sm:px-6">
+					{suggestions.map((s) => (
+						<button type="button" data-term-suggest={s} class="shrink-0 rounded-md border border-white/10 bg-white/[0.03] px-2.5 py-1 text-xs text-slate-300 transition-colors hover:text-white">{s}</button>
+					))}
+				</div>
 			</div>
 		</div>
 	</div>
@@ -61,9 +85,162 @@ const suggestions = ['help', 'whoami', 'skills', 'skills testing', 'projects', '
 
 <script is:inline type="application/json" id="term-data" set:html={JSON.stringify(data)} />
 
+<style>
+	.term {
+		--t-accent: #67e8f9;
+		--t-violet: #c4b5fd;
+		--t-ok: #6ee7b7;
+		--t-prompt: #6ee7b7;
+		--t-warn: #fcd34d;
+		--t-err: #fda4af;
+		box-shadow: 0 30px 100px -30px color-mix(in srgb, var(--t-accent) 35%, transparent);
+		transition: box-shadow 0.4s;
+	}
+	.term[data-theme='green'] {
+		--t-accent: #4ade80;
+		--t-violet: #86efac;
+		--t-ok: #bbf7d0;
+		--t-prompt: #22c55e;
+	}
+	.term[data-theme='amber'] {
+		--t-accent: #fbbf24;
+		--t-violet: #fdba74;
+		--t-ok: #fde68a;
+		--t-prompt: #f59e0b;
+		--t-warn: #fb923c;
+	}
+	.term :global(.t-dim) { color: #64748b; }
+	.term :global(.t-white) { color: #fff; }
+	.term :global(.t-accent) { color: var(--t-accent); }
+	.term :global(.t-violet) { color: var(--t-violet); }
+	.term :global(.t-ok) { color: var(--t-ok); }
+	.term :global(.t-prompt) { color: var(--t-prompt); }
+	.term :global(.t-warn) { color: var(--t-warn); }
+	.term :global(.t-err) { color: var(--t-err); }
+	.term :global(.t-pass) { background: #22c55e; color: #052e16; font-weight: 700; }
+	.term :global(.t-sw1) { color: #f43f5e; }
+	.term :global(.t-sw2) { color: #fb923c; }
+	.term :global(.t-sw3) { color: #facc15; }
+	.term :global(.t-sw4) { color: #4ade80; }
+	.term :global(.t-sw5) { color: #22d3ee; }
+	.term :global(.t-sw6) { color: #a78bfa; }
+	.term-suggest button:hover { border-color: var(--t-accent); }
+
+	.term-input { caret-color: var(--t-accent); transition: color 0.2s; }
+	.term-input.is-valid { color: var(--t-ok); }
+	.term-input.is-invalid { color: var(--t-err); }
+
+	.term-dot {
+		display: flex;
+		height: 0.8rem;
+		width: 0.8rem;
+		align-items: center;
+		justify-content: center;
+		border-radius: 9999px;
+		font-size: 10px;
+		line-height: 1;
+		color: rgba(0, 0, 0, 0.6);
+	}
+	.term-dot span { opacity: 0; transition: opacity 0.2s; }
+	.term:hover .term-dot span { opacity: 1; }
+
+	.term.is-min .term-body,
+	.term.is-min .term-suggest { display: none; }
+
+	.term.is-max {
+		background: #07080d;
+		position: fixed;
+		inset: 2.5rem;
+		z-index: 80;
+		box-shadow: 0 0 0 100vmax rgba(5, 6, 10, 0.75), 0 40px 140px -20px color-mix(in srgb, var(--t-accent) 45%, transparent);
+	}
+	.term.is-max .term-body { height: auto; flex: 1; }
+	@media (max-width: 640px) {
+		.term.is-max { inset: 0.5rem; }
+	}
+</style>
+
 <script>
 	import { initTerminal } from '../scripts/terminal';
+
 	const root = document.getElementById('term');
 	const raw = document.getElementById('term-data')?.textContent;
-	if (root && raw) initTerminal(root, JSON.parse(raw));
+	const sceneHost = document.getElementById('robot-scene');
+	const deployBtn = document.querySelector<HTMLButtonElement>('[data-deploy]');
+	const deployLabel = document.querySelector<HTMLElement>('[data-deploy-label]');
+
+	if (root && raw) {
+		const term = initTerminal(root, JSON.parse(raw));
+		const idleLabel = deployLabel?.textContent ?? '';
+		const busyLabel = document.documentElement.lang === 'es' ? 'Desplegando… 🛰️' : 'Deploying… 🛰️';
+
+		deployBtn?.addEventListener('click', () => term.run('npm run deploy'));
+		root.addEventListener('term:deploying', () => {
+			if (deployBtn) deployBtn.disabled = true;
+			if (deployLabel) deployLabel.textContent = busyLabel;
+		});
+		root.addEventListener('term:deployed', () => {
+			if (deployBtn) deployBtn.disabled = false;
+			if (deployLabel) deployLabel.textContent = idleLabel;
+		});
+	}
+
+	// Keep the launch on screen: on narrow layouts the scene sits above the terminal,
+	// so bring it into view when the rocket launches and come back afterwards.
+	const smoothTo = (top: number) => {
+		const lenis = (window as any).__lenis;
+		if (lenis) lenis.scrollTo(top, { duration: 1.1 });
+		else window.scrollTo({ top, behavior: 'smooth' });
+	};
+	let scrolledForLaunch = false;
+	window.addEventListener('portfolio:deploy', () => {
+		if (!sceneHost) return;
+		const r = sceneHost.getBoundingClientRect();
+		const shown = Math.max(0, Math.min(r.bottom, window.innerHeight) - Math.max(r.top, 0)) / r.height;
+		if (shown < 0.8) {
+			scrolledForLaunch = true;
+			// leave room for the floating nav when the viewport allows it
+			const gap = Math.min(76, Math.max(0, window.innerHeight - r.height));
+			smoothTo(window.scrollY + r.top - gap);
+		}
+	});
+	window.addEventListener('portfolio:launched', () => {
+		if (!scrolledForLaunch || !root) return;
+		scrolledForLaunch = false;
+		setTimeout(() => {
+			const r = root.getBoundingClientRect();
+			smoothTo(window.scrollY + r.bottom - window.innerHeight + 24);
+		}, 500);
+	});
+
+	// 3D scene (lazy) with a static fallback that still "launches"
+	let sceneReady = false;
+	const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	window.addEventListener('portfolio:deploy', () => {
+		if (sceneReady) return;
+		const rocket = document.querySelector<HTMLElement>('[data-fallback-rocket]');
+		if (rocket && !reduced) rocket.style.transform = 'translateY(-420px)';
+		setTimeout(() => {
+			if (rocket) rocket.style.transform = '';
+			window.dispatchEvent(new CustomEvent('portfolio:launched'));
+		}, 1600);
+	});
+
+	if (sceneHost && !reduced) {
+		const io = new IntersectionObserver(
+			(entries) => {
+				if (!entries[0].isIntersecting) return;
+				io.disconnect();
+				import('../scripts/robot-scene')
+					.then((m) => {
+						m.initRobotScene(sceneHost);
+						sceneReady = true;
+						sceneHost.querySelector('[data-scene-fallback]')?.remove();
+					})
+					.catch(() => {});
+			},
+			{ rootMargin: '400px 0px' },
+		);
+		io.observe(sceneHost);
+	}
 </script>

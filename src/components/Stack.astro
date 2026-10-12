@@ -1,7 +1,7 @@
 ---
 import type { Lang } from '../i18n/ui';
 import { useTranslations } from '../i18n/utils';
-import { stack, workflows, learning, sphereItems } from '../data/stack';
+import { stack, workflows, sphereItems } from '../data/stack';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -51,7 +51,7 @@ const initials = (name: string) => name.replace(/[^A-Za-z#+]/g, '').slice(0, 2);
 											{item.path ? (
 												<svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0" fill={item.color}><path d={item.path} /></svg>
 											) : (
-												<span class="flex h-4 min-w-4 items-center justify-center rounded bg-white/10 px-0.5 font-mono text-[9px] font-bold" style={`color:${item.color}`}>{initials(item.name)}</span>
+												<span class="flex h-4 min-w-4 items-center justify-center rounded bg-white/10 px-0.5 font-mono text-[9px] font-bold" style={`color:${item.color}`}>{item.badge ?? initials(item.name)}</span>
 											)}
 											{item.name}
 										</span>
@@ -81,12 +81,6 @@ const initials = (name: string) => name.replace(/[^A-Za-z#+]/g, '').slice(0, 2);
 				))}
 			</div>
 
-			<div class="reveal mt-8 flex flex-wrap items-center gap-3">
-				<span class="font-mono text-xs uppercase tracking-widest text-slate-500">{t('stack.learning')}</span>
-				{learning.map((l) => (
-					<span class="rounded-full border border-dashed border-violet-400/40 px-3.5 py-1.5 text-sm text-violet-200/90">{l.name}</span>
-				))}
-			</div>
 		</div>
 	</div>
 </section>

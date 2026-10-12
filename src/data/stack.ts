@@ -9,6 +9,8 @@ export interface Tech {
 	path?: string;
 	/** Brand color, lightened when too dark to read on the void background. */
 	color: string;
+	/** Short text shown instead of a logo when there is no icon. */
+	badge?: string;
 }
 
 export interface StackCategory {
@@ -28,8 +30,8 @@ function readable(hex: string) {
 	return lum < 0.35 ? '#e2e8f0' : `#${hex}`;
 }
 
-function tech(name: string, icon?: SimpleIcon, color?: string): Tech {
-	return { name, path: icon?.path, color: color ?? (icon ? readable(icon.hex) : '#a78bfa') };
+function tech(name: string, icon?: SimpleIcon, color?: string, badge?: string): Tech {
+	return { name, path: icon?.path, color: color ?? (icon ? readable(icon.hex) : '#a78bfa'), badge };
 }
 
 export const stack: StackCategory[] = [
@@ -107,6 +109,10 @@ export const stack: StackCategory[] = [
 		id: 'devops',
 		label: { es: 'DevOps & Cloud', en: 'DevOps & Cloud' },
 		items: [
+			tech('Docker', si.siDocker),
+			tech('AWS', undefined, '#ff9900', 'AWS'),
+			tech('Linux', si.siLinux),
+			tech('Nginx', si.siNginx),
 			tech('Git', si.siGit),
 			tech('GitHub', si.siGithub),
 			tech('GitHub Actions', si.siGithubactions),
@@ -114,12 +120,24 @@ export const stack: StackCategory[] = [
 			tech('Vercel', si.siVercel),
 			tech('Netlify', si.siNetlify),
 			tech('Render', si.siRender),
+			tech('Neon', si.siNeon),
 			tech('pnpm monorepos', si.siPnpm),
+		],
+	},
+	{
+		id: 'tools',
+		label: { es: 'Herramientas', en: 'Tools' },
+		items: [
+			tech('Postman', si.siPostman),
+			tech('Figma', si.siFigma),
+			tech('Jira', si.siJira, '#4c9aff'),
+			tech('Trello', si.siTrello, '#4c9aff'),
+			tech('Notion', si.siNotion),
+			tech('Claude Code', si.siClaude),
 		],
 	},
 ];
 
-export const learning: Tech[] = [tech('C#', undefined, '#9b4f96')];
 
 export const workflows: Workflow[] = [
 	{ name: 'SDD · Spec-Driven Development', desc: { es: 'Specs primero con OpenSpec: propuesta → diseño → tareas → código.', en: 'Specs first with OpenSpec: proposal → design → tasks → code.' } },
