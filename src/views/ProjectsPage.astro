@@ -1,0 +1,98 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import Contact from '../components/Contact.astro';
+import { projects, type Category } from '../data/projects';
+import type { Lang } from '../i18n/ui';
+import { useTranslations, localize } from '../i18n/utils';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const filters: { id: 'all' | Category; label: string }[] = [
+	{ id: 'all', label: t('filter.all') },
+	{ id: 'fullstack', label: t('filter.fullstack') },
+	{ id: 'web', label: t('filter.web') },
+	{ id: 'landing', label: t('filter.landing') },
+	{ id: 'game', label: t('filter.game') },
+];
+const counts = Object.fromEntries(filters.map((f) => [f.id, f.id === 'all' ? projects.length : projects.filter((p) => p.category === f.id).length]));
+---
+
+<Layout lang={lang} title={`${t('projects.page.title')} — Franco Gaggero`}>
+	<section class="relative overflow-hidden pb-20 pt-36 sm:pt-44">
+		<div class="pointer-events-none absolute inset-0" aria-hidden="true">
+			<div class="absolute -top-40 left-1/2 h-[500px] w-[900px] -translate-x-1/2 rounded-full bg-violet-600/15 blur-[130px]"></div>
+		</div>
+		<div class="relative mx-auto max-w-6xl px-6">
+			<a href={localize(lang, '/')} class="reveal mb-8 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-slate-500 transition-colors hover:text-white">← {t('projects.back')}</a>
+			<h1 class="reveal font-display text-5xl font-bold leading-[0.95] tracking-tight text-white sm:text-7xl" style="--d:60ms">
+				{t('projects.page.title').split(' ')[0]} <span class="text-gradient">{t('projects.page.title').split(' ').slice(1).join(' ')}</span>
+			</h1>
+			<p class="reveal mt-6 max-w-xl text-lg text-slate-400" style="--d:120ms">{t('projects.page.body')}</p>
+
+			<div class="reveal mt-12 flex flex-wrap gap-2" role="tablist" style="--d:180ms">
+				{filters.map((f, i) => (
+					<button
+						type="button"
+						role="tab"
+						data-filter={f.id}
+						aria-selected={i === 0 ? 'true' : 'false'}
+						class="filter-chip rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-sm text-slate-300 transition-all duration-300 hover:border-white/30 hover:text-white"
+					>
+						{f.label} <span class="ml-1 font-mono text-[11px] opacity-50">{counts[f.id]}</span>
+					</button>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section class="relative pb-20">
+		<div id="project-grid" class="mx-auto grid max-w-6xl gap-5 px-6 md:grid-cols-2 lg:grid-cols-3">
+			{projects.map((p, i) => <ProjectCard project={p} lang={lang} index={i} />)}
+		</div>
+	</section>
+
+	<Contact lang={lang} />
+</Layout>
+
+<style>
+	.filter-chip[aria-selected='true'] {
+		color: #05060a;
+		border-color: transparent;
+		background: linear-gradient(100deg, #22d3ee, #a78bfa);
+	}
+	:global(.project-card.is-hidden) {
+		display: none;
+	}
+	:global(.project-card.is-entering) {
+		animation: card-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+	}
+	@keyframes card-in {
+		from { opacity: 0; transform: translateY(20px) scale(0.97); }
+		to { opacity: 1; transform: none; }
+	}
+</style>
+
+<script>
+	const chips = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+	const cards = document.querySelectorAll<HTMLElement>('.project-card');
+	chips.forEach((chip) => {
+		chip.addEventListener('click', () => {
+			const f = chip.dataset.filter;
+			chips.forEach((c) => c.setAttribute('aria-selected', String(c === chip)));
+			cards.forEach((card, i) => {
+				const show = f === 'all' || card.dataset.category === f;
+				card.classList.toggle('is-hidden', !show);
+				card.classList.remove('is-entering');
+				if (show) {
+					card.classList.add('revealed');
+					void card.offsetWidth;
+					card.style.animationDelay = `${(i % 6) * 40}ms`;
+					card.classList.add('is-entering');
+				}
+			});
+		});
+	});
+</script>
