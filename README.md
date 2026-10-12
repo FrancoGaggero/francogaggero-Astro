@@ -1,54 +1,26 @@
-# Franco Gaggero - Portfolio
+# Franco Gaggero — Portfolio
 
-Modern portfolio built with Astro and TailwindCSS.
+Portfolio personal construido con **Astro 5 + Tailwind**, bilingüe (ES `/` · EN `/en/`).
 
-```sh
-npm create astro@latest -- --template basics
-```
+## Destacados
+- **Hero WebGL** (`src/scripts/particles.ts`, three.js): ~11k partículas que forman "FG" y reaccionan al mouse/scroll. Fallback estático con `prefers-reduced-motion` o sin WebGL.
+- **Terminal interactiva** (`src/scripts/terminal.ts`): comandos `help`, `skills`, `projects`, `experience`, `contact`, `sudo hire-me`…
+- **Esfera 3D de tecnologías** (`src/scripts/tech-sphere.ts`) + marquees por categoría (`src/components/Stack.astro`, datos en `src/data/stack.ts`, logos de `simple-icons` en build).
+- **Timeline `git log`** dibujado con el scroll (`src/components/Timeline.astro`, datos en `src/data/timeline.ts`).
+- **Galería horizontal** de proyectos fijada con GSAP ScrollTrigger (scroll-snap en mobile).
+- **Cards 3D** con tilt + spotlight (`src/components/ProjectCard.astro`, motor en `src/layouts/Layout.astro`).
+- Smooth scroll con Lenis, imágenes optimizadas con `astro:assets`.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## Agregar un proyecto
+Editá `src/data/projects.ts` (descripción en `es` y `en`, captura en `src/assets/projects/`). `featured: true` lo muestra en la home.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Textos
+Todos los textos de UI están en `src/i18n/ui.ts`.
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
-
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## Comandos
+| Comando | Acción |
+| --- | --- |
+| `npm install` | Instala dependencias |
+| `npm run dev` | Dev server en `localhost:8080` |
+| `npm run build` | Build a `./dist/` |
+| `npm run preview` | Previsualiza el build |

@@ -1,0 +1,98 @@
+---
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+import { timeline, shortHash } from '../data/timeline';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const typeColor: Record<string, string> = {
+	feat: '#22d3ee',
+	ship: '#fb923c',
+	client: '#a78bfa',
+	uni: '#34d399',
+	init: '#94a3b8',
+};
+---
+
+<section id="journey" class="relative py-28 sm:py-36">
+	<div class="mx-auto max-w-4xl px-6">
+		<p class="kicker reveal">{t('timeline.kicker')}</p>
+		<h2 class="reveal mt-5 font-display text-4xl font-bold leading-tight tracking-tight text-white sm:text-6xl" style="--d:80ms">
+			{t('timeline.title1')}<br /><span class="text-gradient">{t('timeline.title2')}</span>
+		</h2>
+
+		<div class="reveal mt-12 overflow-hidden rounded-2xl border border-white/10 bg-[#07080d]/80 font-mono shadow-2xl" style="--d:140ms">
+			<div class="flex items-center gap-2 border-b border-white/5 px-4 py-3">
+				<span class="h-3 w-3 rounded-full bg-[#ff5f57]"></span>
+				<span class="h-3 w-3 rounded-full bg-[#febc2e]"></span>
+				<span class="h-3 w-3 rounded-full bg-[#28c840]"></span>
+				<span class="ml-3 text-xs text-slate-500">franco@portfolio:~/career$ <span class="text-slate-300">git log --graph --oneline</span></span>
+			</div>
+
+			<ol id="git-log" class="relative px-4 py-8 sm:px-8">
+				<!-- main branch line (drawn on scroll) -->
+				<span class="absolute bottom-10 left-[calc(1rem+11px)] top-10 w-0.5 bg-white/5 sm:left-[calc(2rem+11px)]" aria-hidden="true"></span>
+				<span data-git-line class="absolute bottom-10 left-[calc(1rem+11px)] top-10 w-0.5 origin-top bg-gradient-to-b from-cyan-400 via-violet-400 to-fuchsia-400 sm:left-[calc(2rem+11px)]" aria-hidden="true"></span>
+
+				{timeline.map((c) => {
+					const color = typeColor[c.type];
+					const hash = shortHash(c.date + c.msg.en);
+					return (
+						<li data-commit class="relative pb-9 pl-12 last:pb-0 sm:pl-20">
+							{c.lane === 1 && (
+								<svg class="absolute -top-5 left-[12px] h-9 w-8 sm:w-12" viewBox="0 0 48 36" preserveAspectRatio="none" aria-hidden="true">
+									<path d="M0 0 C0 22, 34 10, 34 34" fill="none" stroke={color} stroke-width="2" stroke-opacity="0.6" vector-effect="non-scaling-stroke" />
+								</svg>
+							)}
+							<span
+								class:list={['absolute top-1 flex h-6 w-6 items-center justify-center rounded-full border-2 bg-[#07080d]', c.lane === 1 ? 'left-[32px] sm:left-[46px]' : 'left-0']}
+								style={`border-color:${color}; box-shadow: 0 0 16px -2px ${color}`}
+							>
+								<span class="h-2 w-2 rounded-full" style={`background:${color}`}></span>
+							</span>
+							<div class:list={[c.lane === 1 && 'pl-6 sm:pl-8']}>
+								<p class="flex flex-wrap items-center gap-2 text-xs">
+									<span class="text-amber-300">{hash}</span>
+									{c.head && <span class="rounded bg-cyan-400/15 px-1.5 py-0.5 text-[10px] font-semibold text-cyan-300">HEAD → main</span>}
+									<span class="text-slate-500">{c.date}</span>
+								</p>
+								<p class="mt-1.5 text-sm leading-relaxed text-slate-200 sm:text-base">
+									<span style={`color:${color}`}>{c.type}{c.scope && `(${c.scope})`}:</span> {c.msg[lang]}
+								</p>
+								<div class="mt-2 flex flex-wrap gap-1.5">
+									{c.tags.map((tag) => <span class="rounded bg-white/5 px-1.5 py-0.5 text-[10px] text-slate-400">#{tag}</span>)}
+								</div>
+							</div>
+						</li>
+					);
+				})}
+			</ol>
+		</div>
+	</div>
+</section>
+
+<script>
+	import { gsap } from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+	const list = document.getElementById('git-log');
+	if (list && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+		gsap.registerPlugin(ScrollTrigger);
+		gsap.fromTo(
+			list.querySelector('[data-git-line]'),
+			{ scaleY: 0 },
+			{ scaleY: 1, ease: 'none', scrollTrigger: { trigger: list, start: 'top 75%', end: 'bottom 60%', scrub: 0.6 } },
+		);
+		list.querySelectorAll<HTMLElement>('[data-commit]').forEach((row) => {
+			gsap.from(row, {
+				opacity: 0,
+				x: -24,
+				duration: 0.7,
+				ease: 'power3.out',
+				scrollTrigger: { trigger: row, start: 'top 85%', toggleActions: 'play none none reverse' },
+			});
+		});
+	}
+</script>

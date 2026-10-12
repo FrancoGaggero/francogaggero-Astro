@@ -1,0 +1,147 @@
+---
+import { Image } from 'astro:assets';
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+import { PLAY_STORE_URL } from '../data/projects';
+import { siApple } from 'simple-icons';
+import icon from '../assets/capibara/icon.png';
+import shotMenu from '../assets/capibara/menu.jpg';
+import shotPuzzle from '../assets/capibara/shot2.jpg';
+import shotFeature from '../assets/capibara/feature.jpg';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const storeUrl = `${PLAY_STORE_URL}&hl=${lang}`;
+const shots = [shotFeature, shotMenu, shotPuzzle];
+---
+
+<section id="game" class="relative overflow-hidden py-28 sm:py-36">
+	<div class="pointer-events-none absolute inset-0" aria-hidden="true">
+		<div class="absolute left-1/2 top-1/3 h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-orange-500/10 blur-[140px]"></div>
+	</div>
+
+	<div class="relative mx-auto grid max-w-6xl items-center gap-16 px-6 lg:grid-cols-[0.9fr_1.1fr]">
+		<!-- Info -->
+		<div>
+			<div class="reveal flex items-center gap-4">
+				<Image src={icon} alt="Capibara Learn & Play icon" width={128} class="h-16 w-16 rounded-2xl shadow-[0_10px_40px_-10px] shadow-orange-500/60" />
+				<p class="kicker !text-orange-300/90 before:!to-orange-300/80">{t('game.kicker')}</p>
+			</div>
+			<h2 class="reveal mt-6 font-display text-4xl font-bold leading-tight tracking-tight text-white sm:text-6xl" style="--d:80ms">
+				{t('game.title')}
+			</h2>
+			<p class="reveal mt-6 text-lg leading-relaxed text-slate-400" style="--d:140ms">{t('game.body')}</p>
+
+			<div class="reveal mt-8 flex flex-wrap gap-2" style="--d:200ms">
+				{[t('game.f1'), t('game.f2'), t('game.f3')].map((f) => (
+					<span class="rounded-full border border-orange-300/20 bg-orange-300/5 px-3.5 py-1.5 text-sm text-orange-100/90">{f}</span>
+				))}
+			</div>
+
+			<div class="reveal mt-10 flex flex-wrap items-center gap-3" style="--d:260ms">
+				<a href={storeUrl} target="_blank" rel="noopener" class="inline-flex items-center gap-3 rounded-2xl border border-white/15 bg-white px-5 py-3 text-void transition-transform duration-300 hover:-translate-y-0.5 hover:shadow-[0_15px_40px_-10px] hover:shadow-orange-400/50" data-magnetic="0.2">
+					<svg class="h-7 w-7" viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 1.8 13.4 12 3.6 22.2c-.4-.2-.6-.6-.6-1.1V2.9c0-.5.2-.9.6-1.1Z"/><path fill="#FBBC04" d="m16.8 8.6-3.4 3.4 3.4 3.4 3.9-2.2c.8-.5.8-1.7 0-2.2l-3.9-2.4Z"/><path fill="#4285F4" d="M3.6 22.2 13.4 12l3.4 3.4-11.5 6.6c-.6.4-1.2.4-1.7.2Z"/><path fill="#EA4335" d="M3.6 1.8c.5-.2 1.1-.2 1.7.2l11.5 6.6-3.4 3.4L3.6 1.8Z"/></svg>
+					<span class="flex flex-col leading-tight">
+						<span class="text-[10px] font-medium uppercase tracking-wider text-slate-500">{t('game.available')}</span>
+						<span class="font-display text-lg font-bold">Google Play</span>
+					</span>
+				</a>
+
+				<div class="relative inline-flex cursor-not-allowed items-center gap-3 rounded-2xl border border-white/15 bg-black px-5 py-3 text-white/70" aria-disabled="true" title={t('game.soon')}>
+					<svg class="h-7 w-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d={siApple.path} /></svg>
+					<span class="flex flex-col leading-tight">
+						<span class="text-[10px] font-medium uppercase tracking-wider text-white/50">{t('game.available')}</span>
+						<span class="font-display text-lg font-bold">{t('game.appstore')}</span>
+					</span>
+					<span class="absolute -right-2 -top-2.5 flex items-center gap-1.5 rounded-full border border-orange-300/40 bg-orange-500 px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-white shadow-lg shadow-orange-500/40">
+						<span class="h-1.5 w-1.5 animate-pulse-dot rounded-full bg-white"></span>{t('game.soon')}
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<!-- Phone mockup with auto carousel -->
+		<div class="reveal" style="--d:150ms">
+			<div class="relative mx-auto w-full max-w-[620px]" data-tilt="6">
+				<div class="tilt-glare" data-tilt-glare></div>
+				<div class="relative rounded-[2.2rem] border border-white/15 bg-gradient-to-b from-zinc-800 to-zinc-950 p-3 shadow-[0_40px_120px_-30px_rgba(251,146,60,0.45),0_0_0_1px_rgba(255,255,255,0.04)_inset] sm:p-4">
+					<div class="absolute left-1.5 top-1/2 h-10 w-1.5 -translate-y-1/2 rounded-full bg-black/80 sm:left-2"></div>
+					<div id="game-carousel" class="relative aspect-[2.15/1] w-full overflow-hidden rounded-[1.4rem] bg-orange-200">
+						{shots.map((s, i) => (
+							<Image
+								src={s}
+								alt={`Capibara Learn & Play — ${i + 1}`}
+								width={1100}
+								data-slide={i}
+								class:list={['absolute inset-0 h-full w-full object-cover transition-all duration-1000 ease-out', i === 0 ? 'scale-100 opacity-100' : 'scale-105 opacity-0']}
+								loading={i === 0 ? 'eager' : 'lazy'}
+							/>
+						))}
+						<div class="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/40 to-transparent"></div>
+						<div class="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-2">
+							{shots.map((_, i) => (
+								<button type="button" data-dot={i} aria-label={`Slide ${i + 1}`} class:list={['h-1.5 rounded-full bg-white transition-all duration-500', i === 0 ? 'w-6 opacity-100' : 'w-1.5 opacity-50']}></button>
+							))}
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="mt-6 flex justify-center gap-3">
+				{shots.map((s, i) => (
+					<button type="button" data-thumb={i} class:list={['overflow-hidden rounded-xl border-2 transition-all duration-300', i === 0 ? 'border-orange-400' : 'border-white/10 opacity-60 hover:opacity-100']}>
+						<Image src={s} alt="" width={240} class="h-14 w-auto object-cover sm:h-16" loading="lazy" />
+					</button>
+				))}
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	const root = document.getElementById('game-carousel');
+	if (root) {
+		const slides = root.querySelectorAll<HTMLElement>('[data-slide]');
+		const dots = root.querySelectorAll<HTMLElement>('[data-dot]');
+		const thumbs = document.querySelectorAll<HTMLElement>('[data-thumb]');
+		let current = 0;
+		let timer = 0;
+
+		const show = (n: number) => {
+			current = (n + slides.length) % slides.length;
+			slides.forEach((s, i) => {
+				const on = i === current;
+				s.classList.toggle('opacity-100', on);
+				s.classList.toggle('opacity-0', !on);
+				s.classList.toggle('scale-100', on);
+				s.classList.toggle('scale-105', !on);
+			});
+			dots.forEach((d, i) => {
+				d.classList.toggle('w-6', i === current);
+				d.classList.toggle('w-1.5', i !== current);
+				d.classList.toggle('opacity-50', i !== current);
+			});
+			thumbs.forEach((th, i) => {
+				th.classList.toggle('border-orange-400', i === current);
+				th.classList.toggle('border-white/10', i !== current);
+				th.classList.toggle('opacity-60', i !== current);
+			});
+		};
+		const start = () => {
+			stop();
+			if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) timer = window.setInterval(() => show(current + 1), 3500);
+		};
+		const stop = () => window.clearInterval(timer);
+
+		[...dots, ...thumbs].forEach((el) =>
+			el.addEventListener('click', () => {
+				show(Number(el.dataset.dot ?? el.dataset.thumb));
+				start();
+			}),
+		);
+		root.addEventListener('mouseenter', stop);
+		root.addEventListener('mouseleave', start);
+		start();
+	}
+</script>
