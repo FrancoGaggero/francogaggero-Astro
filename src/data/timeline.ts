@@ -23,6 +23,14 @@ export const timeline: Commit[] = [
 		head: true,
 	},
 	{
+		date: '2026-10',
+		type: 'ship',
+		scope: 'creative',
+		msg: { es: 'BlockScript: mundo 3D que se programa desde una consola', en: 'BlockScript: a 3D world you program from a console' },
+		tags: ['Three.js', 'Remotion'],
+		lane: 1,
+	},
+	{
 		date: '2026-09',
 		type: 'ship',
 		scope: 'mobile',

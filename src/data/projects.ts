@@ -11,6 +11,7 @@ import orangestudio from '../assets/projects/orangestudio.png';
 import valentina from '../assets/projects/valentinabozzone.png';
 import cleansa from '../assets/projects/claeansa.png';
 import capibara from '../assets/capibara/feature.jpg';
+import blockscript from '../assets/projects/blockscript.png';
 
 export type Category = 'fullstack' | 'web' | 'landing' | 'game';
 export type Status = 'new' | 'wip' | 'featured' | 'uni';
@@ -39,6 +40,23 @@ const gh = (repo: string) => `https://github.com/FrancoGaggero/${repo}`;
 export const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.krowdsupply.capibaraLearnPlay';
 
 export const projects: Project[] = [
+  {
+    slug: 'blockscript',
+    title: 'BlockScript',
+    desc: {
+      es: 'Mundo de bloques 3D que se programa desde una consola: un lenguaje de comandos propio y JavaScript real, ejecutado en un Web Worker, lo construyen paso a paso. Motion graphics en vivo con Remotion: animaciones por comando, logros y un replay 3D de tu construcción.',
+      en: 'A 3D block world you program from a console: a custom command language and real JavaScript, sandboxed in a Web Worker, build it step by step. Live Remotion motion graphics: per-command animations, achievements and a 3D replay of your build.',
+    },
+    tags: ['React', 'Three.js', 'Remotion', 'TypeScript'],
+    category: 'web',
+    image: blockscript,
+    accent: ['#b6ff3b', '#22d3ee'],
+    live: 'https://blockscriptshell.netlify.app',
+    repo: gh('BlockScript'),
+    status: 'new',
+    featured: true,
+    year: 2026,
+  },
   {
     slug: 'inventariosmart',
     title: 'InventarioSmart',
